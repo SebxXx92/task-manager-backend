@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000; // Use the PORT environment variable, or default to 5000
 
 app.use(cors());
 app.use(express.json());
@@ -15,11 +15,11 @@ app.get('/tasks', (req, res) => {
 
 // Add a new task
 app.post('/tasks', (req, res) => {
-    const task = { id: Date.now(), text: req.body.text, completed: false };
-    tasks.push(task);
-    console.log('New task added:', task); // Log the new task
-    res.json(task);
-  });
+  const task = { id: Date.now(), text: req.body.text, completed: false };
+  tasks.push(task);
+  console.log('New task added:', task); // Log the new task
+  res.json(task);
+});
 
 // Toggle task completion
 app.put('/tasks/:id', (req, res) => {
